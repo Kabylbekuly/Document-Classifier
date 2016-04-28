@@ -39,7 +39,7 @@ def get_frequency(features, article) :
 	return frequency	
 
 # features
-features = load_features("data/bbc/bbc.terms")
+features = load_features("../data/bbc/bbc.terms")
 
 # article
 
@@ -54,12 +54,14 @@ def articulate(filename) :
 	return frequency
 
 # TESTING
-file_names = os.listdir('news')
+file_names = os.listdir('../news')
 news=[]
 for file in file_names:
-	news.append(articulate('news/'+file))
+	news.append(articulate('../news/'+file))
 
 pred = clf.predict(news)
+classes = ['business','entertainment','politics','sport','tech']
+pred = [classes[x] for x in pred]
 output = zip(file_names,pred)
 for i in output:
 	print(i)
