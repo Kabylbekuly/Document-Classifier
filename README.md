@@ -1,4 +1,5 @@
 ## Document-Classifier
+[](https://github.com/baluKanattil/Document-Classifier)
 Trains a Classifier on BBC data sets and give the accuracy on test data. For testing it on other news articles, add the articles as text files in the folder news
 
 ## Running the code
