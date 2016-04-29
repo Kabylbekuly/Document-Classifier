@@ -10,7 +10,23 @@ The make-data.py converts it into dense matrix and saves the dataframe
 into data.pkl
 '''
 
-df = pd.read_pickle("data.pkl")
+# Getting data
+if 'data.pkl' in os.listdir():
+	df = pd.read_pickle("data.pkl")
+else:
+	data = pd.read_table("data/bbc/bbc.mtx",delimiter=' ', skiprows=2,names=['word','file','val'])
+
+	rows= set(data['file'])
+	cols = set(data['word'])
+
+	df = pd.DataFrame(index=rows,columns=cols)
+	df = df.fillna(0)
+
+	for x in data.itertuples():
+		df[x[1]][x[2]] = x[3]
+
+	df.to_pickle("data.pkl")
+
 labels = pd.read_table("data/bbc/bbc.classes",delimiter=' ',skiprows=4,names=['file','labels'])
 
 #there is a mismatch in the indexes of df and labels
@@ -86,6 +102,8 @@ for file in file_names:
 	news.append(articulate('news/'+file))
 
 pred = clf.predict(news)
+classes = ['business','entertainment','politics','sport','tech']
+pred = [classes[x] for x in pred]
 output = zip(file_names,pred)
 for i in output:
 	print(i)
