@@ -86,6 +86,7 @@ pred = clf.predict(x_test)
 accuracy = float(sum(pred==y_test))/len(pred)
 
 print('accuracy:',accuracy)
+#95%
 
 print("cross validation : 5 FOLD")
 
@@ -93,6 +94,7 @@ scores = cross_validation.cross_val_score(clf,df,y,cv=5)
 print("----scores----")
 print(scores)
 print("average:",scores.mean())
+#96%
 
 
 # TESTING
